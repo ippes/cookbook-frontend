@@ -1,8 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FacebookModule} from 'ngx-facebook';
 
-
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientWrapper} from "./http-client-wrapper";
 
 
 @NgModule({
@@ -10,9 +12,12 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FacebookModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientWrapper],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
