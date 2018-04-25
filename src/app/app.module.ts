@@ -3,8 +3,8 @@ import {NgModule} from '@angular/core';
 import {FacebookModule} from 'ngx-facebook';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from "@angular/common/http";
-import {HttpClientWrapper} from "./http-client-wrapper";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {TokenInterceptor} from "./token.interceptor";
 
 
 @NgModule({
@@ -16,7 +16,11 @@ import {HttpClientWrapper} from "./http-client-wrapper";
     FacebookModule.forRoot(),
     HttpClientModule
   ],
-  providers: [HttpClientWrapper],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
